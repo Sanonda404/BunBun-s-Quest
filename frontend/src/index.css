@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/*
+ * BunBun's Quest — custom daisyUI 5 theme for Tailwind CSS 4
+ *
+ * Install:
+ *   npm install tailwindcss@^4 daisyui@^5
+ *
+ * Import this file from your app's main CSS entry point.
+ * Activate the theme with data-theme="bunbun" on <html>.
+ */
+
+@plugin "daisyui" {
+  themes: bunbun --default;
+  logs: false;
+}
+
+@plugin "daisyui/theme" {
+  name: "bunbun";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  /* Core surfaces */
+  --color-base-100: #FFF9F1;
+  --color-base-200: #FFE7D6;
+  --color-base-300: #F8E3E1;
+  --color-base-content: #765454;
+
+  /* Brand palette */
+  --color-primary: #FFD6E7;
+  --color-primary-content: #765454;
+  --color-secondary: #DCCBFF;
+  --color-secondary-content: #554477;
+  --color-accent: #CDECC9;
+  --color-accent-content: #355D43;
+  --color-neutral: #A67C7C;
+  --color-neutral-content: #FFF9F1;
+
+  /* Semantic colors */
+  --color-info: #AEE3F7;
+  --color-info-content: #31566A;
+  --color-success: #A9D9B6;
+  --color-success-content: #294E36;
+  --color-warning: #FFE8A8;
+  --color-warning-content: #6B5121;
+  --color-error: #F8A6C9;
+  --color-error-content: #71354D;
+
+  /* Rounded, soft UI */
+  --radius-selector: 1.25rem;
+  --radius-field: 1rem;
+  --radius-box: 1.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+/* Full BunBun palette as Tailwind utility colors:
+   bg-bunny-pink, text-soft-brown, border-lilac, etc. */
+@theme {
+  --color-bunny-pink: #FFD6E7;
+  --color-peach-cream: #FFE7D6;
+  --color-lavender: #DCCBFF;
+  --color-mint-green: #CDECC9;
+  --color-sunshine-yellow: #FFE8A8;
+  --color-bun-cream: #FFF9F1;
+  --color-soft-brown: #A67C7C;
+
+  --color-rose: #F8A6C9;
+  --color-lilac: #B7A7FF;
+  --color-sky: #AEE3F7;
+  --color-mint: #A9D9B6;
+  --color-apricot: #FFC9A8;
+  --color-butter: #FFF3C4;
+  --color-cloud: #E6E9F7;
+  --color-stone: #D8CFCE;
+
+  --font-family-sans: "Nunito", "Quicksand", ui-rounded, system-ui, sans-serif;
+}
+
+/* App-wide styling */
+:root {
+  color-scheme: light;
+  font-family: "Nunito", "Quicksand", ui-rounded, system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  min-height: 100%;
+  background: #FFF9F1;
+}
