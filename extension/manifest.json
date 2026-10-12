@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Bun Bun's Distraction Guard",
+  "version": "1.0.0",
+  "description": "Cozy browser companion guarding your study focus for Bun Bun's Quest.",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
