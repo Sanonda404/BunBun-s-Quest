@@ -1,97 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700&display=swap");
 @import "tailwindcss";
 
-/*
- * BunBun's Quest — custom daisyUI 5 theme for Tailwind CSS 4
- *
- * Install:
- *   npm install tailwindcss@^4 daisyui@^5
- *
- * Import this file from your app's main CSS entry point.
- * Activate the theme with data-theme="bunbun" on <html>.
- */
-
+/* daisyUI v5 */
 @plugin "daisyui" {
-  themes: bunbun --default;
   logs: false;
 }
 
+/* BunBun's cozy theme: warm cream paper, strawberry-milk pink, lavender and mint */
 @plugin "daisyui/theme" {
   name: "bunbun";
   default: true;
   prefersdark: false;
   color-scheme: light;
 
-  /* Core surfaces */
-  --color-base-100: #FFF9F1;
-  --color-base-200: #FFE7D6;
-  --color-base-300: #F8E3E1;
-  --color-base-content: #765454;
+  --color-base-100: #fff8f0;
+  --color-base-200: #fdebdd;
+  --color-base-300: #f6d9c4;
+  --color-base-content: #4b3a2e;
 
-  /* Brand palette */
-  --color-primary: #FFD6E7;
-  --color-primary-content: #765454;
-  --color-secondary: #DCCBFF;
-  --color-secondary-content: #554477;
-  --color-accent: #CDECC9;
-  --color-accent-content: #355D43;
-  --color-neutral: #A67C7C;
-  --color-neutral-content: #FFF9F1;
+  --color-primary: #F2A7CD;
+  --color-glow: ##E44996;
+  --color-primary-content: #4a2230;
+  --color-secondary: #bfa8f0;
+  --color-secondary-content: #2f2150;
+  --color-accent: #9fe0c2;
+  --color-accent-content: #1e4636;
+  --color-neutral: #5b4636;
+  --color-neutral-content: #fff8f0;
 
-  /* Semantic colors */
-  --color-info: #AEE3F7;
-  --color-info-content: #31566A;
-  --color-success: #A9D9B6;
-  --color-success-content: #294E36;
-  --color-warning: #FFE8A8;
-  --color-warning-content: #6B5121;
-  --color-error: #F8A6C9;
-  --color-error-content: #71354D;
+  --color-info: #9ccbf5;
+  --color-info-content: #14344f;
+  --color-success: #9fe0c2;
+  --color-success-content: #1e4636;
+  --color-warning: #ffd98a;
+  --color-warning-content: #4d3a0a;
+  --color-error: #f58b8b;
+  --color-error-content: #4d1414;
 
-  /* Rounded, soft UI */
-  --radius-selector: 1.25rem;
-  --radius-field: 1rem;
+  /* Roundness: big soft cards, pill buttons and badges */
+  --radius-selector: 9999px;
+  --radius-field: 9999px;
   --radius-box: 1.5rem;
+
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
-  --border: 1px;
-  --depth: 1;
+  --border: 2px;
+  --depth: 0;
   --noise: 0;
 }
 
-/* Full BunBun palette as Tailwind utility colors:
-   bg-bunny-pink, text-soft-brown, border-lilac, etc. */
 @theme {
-  --color-bunny-pink: #FFD6E7;
-  --color-peach-cream: #FFE7D6;
-  --color-lavender: #DCCBFF;
-  --color-mint-green: #CDECC9;
-  --color-sunshine-yellow: #FFE8A8;
-  --color-bun-cream: #FFF9F1;
-  --color-soft-brown: #A67C7C;
+  --font-display: "Fredoka", ui-rounded, system-ui, sans-serif;
+  --font-sans: "Nunito", ui-rounded, system-ui, sans-serif;
 
-  --color-rose: #F8A6C9;
-  --color-lilac: #B7A7FF;
-  --color-sky: #AEE3F7;
-  --color-mint: #A9D9B6;
-  --color-apricot: #FFC9A8;
-  --color-butter: #FFF3C4;
-  --color-cloud: #E6E9F7;
-  --color-stone: #D8CFCE;
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-breathe: breathe 4.5s ease-in-out infinite;
+  --animate-wiggle: wiggle 0.6s ease-in-out 3;
+  --animate-hop: hop 0.9s ease-in-out 2;
+  --animate-blink: blink 5s infinite;
+  --animate-ear: ear 3.2s ease-in-out infinite;
+  --animate-zzz: zzz 3s ease-in-out infinite;
+  --animate-pop: pop 0.35s ease-out both;
 
-  --font-family-sans: "Nunito", "Quicksand", ui-rounded, system-ui, sans-serif;
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.035); }
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+  @keyframes hop {
+    0%, 100% { transform: translateY(0); }
+    40%, 60% { transform: translateY(-22px); }
+    80% { transform: translateY(0) scaleY(0.94); }
+  }
+  @keyframes blink {
+    0%, 92%, 100% { transform: scaleY(1); }
+    96% { transform: scaleY(0.1); }
+  }
+  @keyframes ear {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-6deg); }
+  }
+  @keyframes zzz {
+    0% { opacity: 0; transform: translate(0, 0) scale(0.7); }
+    30% { opacity: 1; }
+    100% { opacity: 0; transform: translate(14px, -26px) scale(1.1); }
+  }
+  @keyframes pop {
+    0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
 }
 
-/* App-wide styling */
-:root {
-  color-scheme: light;
-  font-family: "Nunito", "Quicksand", ui-rounded, system-ui, sans-serif;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  body {
+    @apply font-sans bg-base-100 text-base-content antialiased;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+  }
 }
 
-html {
-  min-height: 100%;
-  background: #FFF9F1;
+/* Soft, slightly raised card used across the app */
+@utility cozy-card {
+  @apply rounded-box border-2 border-base-300 bg-base-100/90;
+  box-shadow: 0 6px 0 0 var(--color-base-300);
+}
+
+/* Dreamy background wash */
+@utility cozy-bg {
+  background:
+    radial-gradient(60rem 30rem at 10% -10%, #fbd3de88, transparent 60%),
+    radial-gradient(50rem 28rem at 100% 0%, #d9ccf888, transparent 60%),
+    radial-gradient(50rem 30rem at 50% 110%, #c9f0dd88, transparent 60%),
+    var(--color-base-100);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
