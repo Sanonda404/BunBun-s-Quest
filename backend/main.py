@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from src.routers import health, guard
 
 app = FastAPI(title="Bun Bun's Quest API", version="1.0.0")
 
@@ -12,6 +13,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/health")
-async def health_check():
-    return {"status": "healthy", "companion": "BunBun is awake and ready!"}
+# Register Router Modules
+app.include_router(health.router)
+app.include_router(guard.router)
