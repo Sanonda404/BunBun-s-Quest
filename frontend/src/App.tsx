@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import BunBun, { type BunState } from "../components/BunBun";
-import InboxDrawer from "../components/InboxDrawer";
+import BunBun, { type BunState } from "./components/BunBun";
+import InboxDrawer from "./components/InboxDrawer";
+import QuizModal from "./components/QuizModal";
+import FocusTimer from "./components/FocusTimer";
 
 type Mood = { id: string; emoji: string; label: string; reply: string };
 type InputMode = "voice" | "text";
@@ -25,6 +27,7 @@ export default function HomeScreen() {
   const [music, setMusic] = useState(false);
   const [focusing, setFocusing] = useState(false);
   const [inboxCount, setInboxCount] = useState(0);
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
 
   // After the hello hop, settle into idle.
   useEffect(() => {
@@ -136,14 +139,14 @@ export default function HomeScreen() {
               <div role="tablist" className="tabs tabs-boxed bg-base-200">
                 <button
                   role="tab"
-                  className={`tab ${mode === "voice" ? "tab-active !bg-primary" : ""}`}
+                  className={`tab ${mode === "voice" ? "tab-active bg-primary!" : ""}`}
                   onClick={() => setMode("voice")}
                 >
                   🎙️ Voice
                 </button>
                 <button
                   role="tab"
-                  className={`tab ${mode === "text" ? "tab-active !bg-primary" : ""}`}
+                  className={`tab ${mode === "text" ? "tab-active bg-primary!" : ""}`}
                   onClick={() => setMode("text")}
                 >
                   💬 Text
@@ -184,6 +187,12 @@ export default function HomeScreen() {
               <button className="btn btn-primary" onClick={toggleFocus}>
                 {focusing ? "Finish session" : "Start studying"}
               </button>
+              <button 
+                onClick={() => setIsQuizOpen(true)} 
+                className="btn btn-sm btn-outline btn-secondary rounded-full font-semibold"
+              >
+                🧠 Knowledge Vault
+              </button>
             </div>
           </section>
         </div>
@@ -191,6 +200,18 @@ export default function HomeScreen() {
 
       {/* Slide-out Inbox Drawer Sidebar Component */}
       <InboxDrawer />
+      <QuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
+        {/* Interactive Focus Timer Session */}
+      <FocusTimer
+        onSessionStateChange={(isFocusing) => {
+          setFocusing(isFocusing);
+          setBun(isFocusing ? "sleeping" : "idle");
+        }}
+        onTakeBreak={() => {
+          setBun("happy");
+          alert("🎉 Focus session complete! Bun Bun says time for a soft break!");
+        }}
+      />
     </div>
   );
 }
