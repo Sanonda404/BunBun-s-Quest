@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.routers import health, guard
+from src.routers import health, guard, quiz
 
 app = FastAPI(title="Bun Bun's Quest API", version="1.0.0")
 
@@ -16,3 +16,4 @@ app.add_middleware(
 # Register Router Modules
 app.include_router(health.router)
 app.include_router(guard.router)
+app.include_router(quiz.router)
