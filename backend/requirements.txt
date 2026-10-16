@@ -1,12 +1,7 @@
 fastapi
 uvicorn
 pydantic
-chromadb
-sentence-transformers
 google-genai
 python-dotenv
-langchain-text-splitters
-pypdf
-python-multipart
 pytest
 groq

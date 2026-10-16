@@ -33,29 +33,7 @@ class SessionStorage:
         self._inbox = [item for item in self._inbox if item.get("id") != item_id]
         return len(self._inbox) < initial_len
 
-    # --- Review Bank Methods ---
-    def get_review_bank(self) -> List[Dict[str, Any]]:
-        return self._review_bank
-
     def set_focus_state(self, is_active: bool) -> None:
         self._is_focus_active = is_active
-
-    def add_to_review_bank(self, question_data: Dict[str, Any]) -> Dict[str, Any]:
-        item_id = str(uuid.uuid4())
-        entry = {
-            "id": item_id,
-            "question": question_data.get("question"),
-            "user_answer": question_data.get("user_answer"),
-            "correct_answer": question_data.get("correct_answer"),
-            "explanation": question_data.get("explanation"),
-            "topic": question_data.get("topic", self._active_topic)
-        }
-        self._review_bank.append(entry)
-        return entry
-
-    def remove_from_review_bank(self, item_id: str) -> bool:
-        initial_len = len(self._review_bank)
-        self._review_bank = [q for q in self._review_bank if q.get("id") != item_id]
-        return len(self._review_bank) < initial_len
 
 session_storage = SessionStorage()
