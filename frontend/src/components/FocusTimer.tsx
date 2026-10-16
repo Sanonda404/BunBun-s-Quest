@@ -11,12 +11,26 @@ export default function FocusTimer({ onSessionStateChange, onTakeBreak }: FocusT
   const [isRunning, setIsRunning] = useState(false);
   const [completedSessions, setCompletedSessions] = useState(0);
 
+  // Helper function to sync focus state with the backend server storage pattern
+  const updateFocusStateOnBackend = async (active: boolean) => {
+    try {
+      await fetch("http://localhost:8000/api/session/set-focus-state", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ is_focus_active: active }),
+      });
+      console.log(`[BunBun] Backend focus state updated: ${active}`);
+    } catch (err) {
+      console.error("Failed to sync focus state with backend:", err);
+    }
+  };
+
   // Sync initial state when workMinutes changes
   useEffect(() => {
     if (!isRunning) {
       setTimeLeft(workMinutes * 60);
     }
-  }, [workMinutes]);
+  }, [workMinutes, isRunning]);
 
   // Main countdown ticker
   useEffect(() => {
@@ -26,6 +40,8 @@ export default function FocusTimer({ onSessionStateChange, onTakeBreak }: FocusT
     } else if (timeLeft === 0 && isRunning) {
       setIsRunning(false);
       onSessionStateChange(false);
+      updateFocusStateOnBackend(false); // <--- Focus mode turned OFF on session finish
+      
       setCompletedSessions((prev) => prev + 1);
       onTakeBreak();
     }
@@ -36,11 +52,13 @@ export default function FocusTimer({ onSessionStateChange, onTakeBreak }: FocusT
     const nextRunningState = !isRunning;
     setIsRunning(nextRunningState);
     onSessionStateChange(nextRunningState);
+    updateFocusStateOnBackend(nextRunningState); // <--- Syncs with backend storage when Start/Pause clicked
   };
 
   const resetTimer = () => {
     setIsRunning(false);
     onSessionStateChange(false);
+    updateFocusStateOnBackend(false); // <--- Syncs with backend storage when Reset clicked
     setTimeLeft(workMinutes * 60);
   };
 
@@ -61,6 +79,10 @@ export default function FocusTimer({ onSessionStateChange, onTakeBreak }: FocusT
           </p>
           <span className="badge badge-sm badge-warning font-bold">
             {completedSessions} Sessions Completed
+          </span>
+          {/* Status Badge indicator */}
+          <span className={`badge badge-sm ${isRunning ? "badge-success text-white" : "badge-ghost"} font-medium`}>
+            {isRunning ? "🛡️ Guard Active" : "☕ Paused / Break"}
           </span>
         </div>
         <p className="text-xs opacity-70">
