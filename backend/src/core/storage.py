@@ -6,6 +6,7 @@ class SessionStorage:
         self._active_topic: str = "Computer Science & Programming"
         self._inbox: List[Dict[str, Any]] = []
         self._review_bank: List[Dict[str, Any]] = []
+        self._is_focus_active: bool = False  # Default focus state
 
     def get_active_topic(self) -> str:
         return self._active_topic
@@ -35,6 +36,9 @@ class SessionStorage:
     # --- Review Bank Methods ---
     def get_review_bank(self) -> List[Dict[str, Any]]:
         return self._review_bank
+
+    def set_focus_state(self, is_active: bool) -> None:
+        self._is_focus_active = is_active
 
     def add_to_review_bank(self, question_data: Dict[str, Any]) -> Dict[str, Any]:
         item_id = str(uuid.uuid4())

@@ -13,3 +13,8 @@ class DistractionCheckResponse(BaseModel):
 
 class TopicUpdateSchema(BaseModel):
     topic: str
+
+class InboxItemSchema(BaseModel):
+    url: str
+    title: str = ""
+    saved_at: str = "Just now"

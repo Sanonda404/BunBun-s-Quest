@@ -1,4 +1,11 @@
-from src.schemas.guard import TabDataSchema, DistractionCheckResponse
+import asyncio
+from groq import AsyncGroq
+from src.core.config import settings
 
-tab = TabDataSchema(url="https://youtube.com", title="Cat Videos")
-print("Parsed Tab:", tab.model_dump())
+async def list_models():
+    client = AsyncGroq(api_key=settings.GROQ_API_KEY)
+    models = await client.models.list()
+    for m in models.data:
+        print(f"Model ID: {m.id}")
+
+asyncio.run(list_models())
